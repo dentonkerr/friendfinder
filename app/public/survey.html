@@ -6,6 +6,8 @@
     <title>Friend Frinder</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -23,7 +25,7 @@
         <input type="text" id="name" class="form-control" required>
 
         <h3>Link to Photo Image (Required)</h3>
-        <input type="text" id="image" class="form-control" required>
+        <input type="text" id="photo" class="form-control" required>
 
         <br>
         <hr>
@@ -164,7 +166,7 @@
             <footer class="footer">
                 <div class="container">
                     <p>
-                        <a href="api/friends">API Friends List</a>
+                        <a href="/api/friends">API Friends List</a>
                     </p>
                 </div>
             </footer>
@@ -172,3 +174,39 @@
         </form>
 
     </div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+$(".submit").on("click", function(event) {
+    
+    event.preventDefault();
+
+    var newUser = {
+        name: $("#name").val().trim(),
+        photo: $("#photo").val().trim(),
+        scores: [
+            $("#q1").val().trim(),
+            $("#q2").val().trim(),
+            $("#q3").val().trim(),
+            $("#q4").val().trim(),
+            $("#q5").val().trim(),
+            $("#q6").val().trim(),
+            $("#q7").val().trim(),
+            $("#q8").val().trim(),
+            $("#q9").val().trim(),
+            $("#q10").val().trim(),
+        ]
+    };
+
+    console.log(newUser);
+
+    
+
+    //use function to compare current user inputs/display modal with closest match
+
+})
+
+</script>
