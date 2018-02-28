@@ -1,15 +1,27 @@
+var path = require("path");
 var friendsArray = require("../data/friends.js");
-//console.log(friendsArray)
 
-module.exports = function (app) {
+module.exports = function(app) {
 
     app.get("/api/friends", function(req, res) {
         res.json(friendsArray);
     });
 
     app.post("/api/friends", function(req, res) {
-        friendsArray.push(req.body);
+
+        var newUser = req.body;
+
+        newUser.scores = newUser["scores[]"];
+
+        delete newUser ["scores[]"];
+
+        for (var i = 0; i < newUser.scores.length; i++) {
+            newUser.scores[i] = parseInt(newUser.scores[i])
+        };
+
+        friendsArray.push(newUser);
+        
+        res.json(newUser);
     });
 
-    console.log(friendsArray);
 };

@@ -176,37 +176,52 @@
     </div>
 
 </body>
+
 </html>
 
 <script type="text/javascript">
 
-$(".submit").on("click", function(event) {
-    
-    event.preventDefault();
+    $(".submit").on("click", function (event) {
 
-    var newUser = {
-        name: $("#name").val().trim(),
-        photo: $("#photo").val().trim(),
-        scores: [
-            $("#q1").val().trim(),
-            $("#q2").val().trim(),
-            $("#q3").val().trim(),
-            $("#q4").val().trim(),
-            $("#q5").val().trim(),
-            $("#q6").val().trim(),
-            $("#q7").val().trim(),
-            $("#q8").val().trim(),
-            $("#q9").val().trim(),
-            $("#q10").val().trim(),
-        ]
-    };
+        event.preventDefault();
 
-    console.log(newUser);
+        var newUser =
+            {
+                name: $("#name").val().trim(),
+                photo: $("#photo").val().trim(),
+                scores:
+                    [
+                        ($("#q1").val().trim()),
+                        $("#q2").val().trim(),
+                        $("#q3").val().trim(),
+                        $("#q4").val().trim(),
+                        $("#q5").val().trim(),
+                        $("#q6").val().trim(),
+                        $("#q7").val().trim(),
+                        $("#q8").val().trim(),
+                        $("#q9").val().trim(),
+                        $("#q10").val().trim()
+                    ],
+            };
 
-    
+        console.log(newUser);
 
-    //use function to compare current user inputs/display modal with closest match
+        $.post("/api/friends", newUser);
 
-})
+        //Clear user answer fields
+        $("#name").val("");
+        $("#photo").val("");
+        $("#q1").val("");
+        $("#q2").val("");
+        $("#q3").val("");
+        $("#q4").val("");
+        $("#q5").val("");
+        $("#q6").val("");
+        $("#q7").val("");
+        $("#q8").val("");
+        $("#q9").val("");
+        $("#q10").val("");
+
+    });
 
 </script>
