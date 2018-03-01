@@ -24,13 +24,13 @@ module.exports = function (app) {
         var friendScore = 0;
 
         for (var i = 0; i < newUser.scores.length; i++) {
-            friendScore += math.abs(newUser.scores[i] - match.scores[i]);
+            friendScore += Math.abs(newUser.scores[i] - match.scores[i]);
         };
 
         for (var i = 1; i < friendsArray.length; i++) {
             var currentScore = 0;
             for (var j = 0; j < newUser.scores.length; j++) {
-                currentScore += math.abs(newUser.scores[j] - friendsArray[i].scores[j]);
+                currentScore += Math.abs(newUser.scores[j] - friendsArray[i].scores[j]);
             };
             if (currentScore < friendScore) {
                 match = friendsArray[i];
@@ -40,7 +40,7 @@ module.exports = function (app) {
 
         friendsArray.push(newUser);
 
-        res.json(newUser);
+        res.json(match);
     });
 
 };
