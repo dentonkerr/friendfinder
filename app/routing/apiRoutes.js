@@ -11,10 +11,7 @@ module.exports = function (app) {
 
         var newUser = req.body;
 
-        newUser.scores = newUser["scores[]"];
-
-        delete newUser["scores[]"];
-
+        // converting newUser scores to integers
         for (var i = 0; i < newUser.scores.length; i++) {
             newUser.scores[i] = parseInt(newUser.scores[i])
         };
@@ -23,10 +20,12 @@ module.exports = function (app) {
 
         var friendScore = 0;
 
+        //comparing Steve
         for (var i = 0; i < newUser.scores.length; i++) {
             friendScore += Math.abs(newUser.scores[i] - match.scores[i]);
         };
 
+        //comparing Steve comparison to the rest of friends
         for (var i = 1; i < friendsArray.length; i++) {
             var currentScore = 0;
             for (var j = 0; j < newUser.scores.length; j++) {

@@ -40,17 +40,15 @@
 
         <form>
             <h3>Name (Required)</h3>
-            <input type="text" id="name" class="form-control" placeholder="Name here" required>
+            <input type="text" id="name" class="form-control" placeholder="Name here">
 
             <h3>Link to Photo Image (Required)</h3>
-            <input type="text" id="photo" class="form-control" placeholder="Link picture here"required>
-        </form>
+            <input type="text" id="photo" class="form-control" placeholder="Link picture here">
 
-        <br>
-        <hr>
-        <h2>Answer Questions (1 = Strongly Disagree to 5 = Strongly Agree)</h2>
+            <br>
+            <hr>
+            <h2>Answer Questions (1 = Strongly Disagree to 5 = Strongly Agree)</h2>
 
-        <form>
             <div class="form group">
                 <label for="q1">
                     <h3>1. I make friends easily.</h3>
@@ -224,53 +222,63 @@
 
         event.preventDefault();
 
-        var newUser =
-            {
-                name: $("#name").val().trim(),
-                photo: $("#photo").val().trim(),
-                scores:
-                    [
-                        ($("#q1").val().trim()),
-                        $("#q2").val().trim(),
-                        $("#q3").val().trim(),
-                        $("#q4").val().trim(),
-                        $("#q5").val().trim(),
-                        $("#q6").val().trim(),
-                        $("#q7").val().trim(),
-                        $("#q8").val().trim(),
-                        $("#q9").val().trim(),
-                        $("#q10").val().trim()
-                    ],
-            };
+        // validate required fields
+        var name = $("#name").val().trim()
+        var photo = $("#photo").val().trim()
 
-        console.log(newUser);
+        if (name && photo) {
 
-        $.post("/api/friends", newUser)
+            var newUser =
+                {
+                    name: $("#name").val().trim(),
+                    photo: $("#photo").val().trim(),
+                    scores:
+                        [
+                            ($("#q1").val().trim()),
+                            $("#q2").val().trim(),
+                            $("#q3").val().trim(),
+                            $("#q4").val().trim(),
+                            $("#q5").val().trim(),
+                            $("#q6").val().trim(),
+                            $("#q7").val().trim(),
+                            $("#q8").val().trim(),
+                            $("#q9").val().trim(),
+                            $("#q10").val().trim()
+                        ],
+                };
 
-            .then(function (data) {
+            console.log(newUser);
 
-                console.log(data);
+            $.post("/api/friends", newUser)
 
-                $("#modal").modal("show");
+                .then(function (data) {
 
-                $(".modal-title").text(data.name);
-                $("#modalImg").attr("src", data.photo);
-            });
+                    console.log(data);
 
-        //Clear user answer fields
-        $("#name").val("");
-        $("#photo").val("");
-        $("#q1").val("");
-        $("#q2").val("");
-        $("#q3").val("");
-        $("#q4").val("");
-        $("#q5").val("");
-        $("#q6").val("");
-        $("#q7").val("");
-        $("#q8").val("");
-        $("#q9").val("");
-        $("#q10").val("");
+                    $("#modal").modal("show");
 
+                    $(".modal-title").text(data.name);
+                    $("#modalImg").attr("src", data.photo);
+                });
+
+            //Clear user answer fields
+            $("#name").val("");
+            $("#photo").val("");
+            $("#q1").val("");
+            $("#q2").val("");
+            $("#q3").val("");
+            $("#q4").val("");
+            $("#q5").val("");
+            $("#q6").val("");
+            $("#q7").val("");
+            $("#q8").val("");
+            $("#q9").val("");
+            $("#q10").val("");
+        }
+
+        else {
+            alert("Name and photo required")
+        };
     });
 
 </script>
